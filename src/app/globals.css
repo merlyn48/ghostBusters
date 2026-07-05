@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@100;300;400;600;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #060608;
+  --foreground: #f3f4f6;
+  --primary: #c39f61; /* Luxury gold */
+  --glow-red: rgba(220, 38, 38, 0.4);
+  --font-cinzel: 'Cinzel', serif;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --font-sans: var(--font-outfit), var(--font-inter), sans-serif;
+  --font-serif: var(--font-cinzel), serif;
+  --font-mono: var(--font-geist-mono), monospace;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #060608;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f1f2e;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c39f61;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Film Grain Overlay */
+.film-grain {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.08"/%3E%3C/svg%3E') repeat;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform:translate(0, 0); }
+  10% { transform:translate(-5%, -10%); }
+  20% { transform:translate(-15%, 5%); }
+  30% { transform:translate(7%, -25%); }
+  40% { transform:translate(-5%, 25%); }
+  50% { transform:translate(-15%, 10%); }
+  60% { transform:translate(15%, 0%); }
+  70% { transform:translate(0%, 15%); }
+  80% { transform:translate(3%, 35%); }
+  90% { transform:translate(-10%, 10%); }
+}
+
+/* VHS Scanlines Overlay */
+.vhs-scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg, 
+    rgba(255, 0, 0, 0.03), 
+    rgba(0, 255, 0, 0.01), 
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0.2;
+}
+
+/* CRT Screen Flicker */
+.crt-flicker {
+  animation: crt-flicker-anim 0.15s infinite;
+}
+
+@keyframes crt-flicker-anim {
+  0% { opacity: 0.985; }
+  50% { opacity: 0.97; }
+  100% { opacity: 0.99; }
+}
+
+/* Glitch CSS Effect */
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00c8;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 #00e6ff, 0 2px #ff00c8;
+  clip: rect(85px, 450px, 140px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(15px, 9999px, 66px, 0); transform: skew(0.3deg); }
+  5% { clip: rect(85px, 9999px, 5px, 0); transform: skew(0.8deg); }
+  10% { clip: rect(34px, 9999px, 115px, 0); transform: skew(0.1deg); }
+  15% { clip: rect(98px, 9999px, 85px, 0); transform: skew(0.6deg); }
+  20% { clip: rect(5px, 9999px, 14px, 0); transform: skew(0.2deg); }
+  25% { clip: rect(112px, 9999px, 76px, 0); transform: skew(0.9deg); }
+  30% { clip: rect(43px, 9999px, 88px, 0); transform: skew(0.4deg); }
+  100% { clip: rect(12px, 9999px, 54px, 0); transform: skew(0.3deg); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(70px, 9999px, 105px, 0); transform: skew(-0.5deg); }
+  10% { clip: rect(15px, 9999px, 85px, 0); transform: skew(0.3deg); }
+  20% { clip: rect(95px, 9999px, 35px, 0); transform: skew(-0.8deg); }
+  30% { clip: rect(5px, 9999px, 120px, 0); transform: skew(0.1deg); }
+  40% { clip: rect(65px, 9999px, 15px, 0); transform: skew(0.6deg); }
+  50% { clip: rect(110px, 9999px, 95px, 0); transform: skew(-0.2deg); }
+  100% { clip: rect(40px, 9999px, 60px, 0); transform: skew(0.1deg); }
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(10, 10, 15, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Page Shaking */
+.page-shake {
+  animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 1px, 0) rotate(0.5deg); }
+  20%, 80% { transform: translate3d(2px, -1px, 0) rotate(-0.5deg); }
+  30%, 50%, 70% { transform: translate3d(-3px, 2px, 0) rotate(1deg); }
+  40%, 60% { transform: translate3d(3px, -2px, 0) rotate(-1deg); }
+}
+
+/* Red cursor trail glow */
+.cursor-glow {
+  width: 25px;
+  height: 25px;
+  background-color: rgb(239, 68, 68);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: screen;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease, width 0.1s ease, height 0.1s ease;
+}
+
+/* Confetti particles */
+@keyframes bat-fly {
+  0% {
+    transform: translate(-10vw, 110vh) scale(0.2) rotate(15deg);
+    opacity: 0;
+  }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% {
+    transform: translate(110vw, -10vh) scale(1) rotate(-15deg);
+    opacity: 0;
+  }
+}
+
+.bat {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  animation: bat-fly 8s linear infinite;
+}
+
+/* Ambient Breathing Glow */
+.ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(195, 159, 97, 0.05) 0%, rgba(6, 6, 8, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: breath 6s ease-in-out infinite alternate;
+}
+
+@keyframes breath {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+
+.ambient-red-glow {
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.08) 0%, rgba(6, 6, 8, 0) 75%);
+}
